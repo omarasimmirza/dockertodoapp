@@ -1,0 +1,31 @@
+version: '3'
+services:
+  fastapitodo:
+    build: ./fastapitodo
+    ports:
+      - "8000:8000"
+    networks:
+      - farm-app
+    depends_on:
+      - db
+  reacttodo:
+    build: ./reacttodo
+    stdin_open: true
+    ports:
+      - "3000:3000"
+    networks:
+      - farm-app
+  db:
+    image: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - farm-app
+    volumes:
+      - mongo-data:/data/db
+volumes:
+  mongo-data:
+    driver: local
+networks:
+  farm-app:
+    driver: bridge
