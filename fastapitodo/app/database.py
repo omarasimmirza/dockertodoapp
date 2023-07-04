@@ -18,7 +18,6 @@ async def fetch_one_todo(title):
 async def fetch_all_todos():
     todos = []
     cursor = collection.find({})
-    print("hey y'all")
     async for document in cursor:
         todos.append(Todo(**document))
     return todos
